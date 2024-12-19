@@ -1,0 +1,6 @@
+commands:
+  -
+    name: hello
+    command: 'echo "Hello World!"'
+    source: package.json
+    description: ''
