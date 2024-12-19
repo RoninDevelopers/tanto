@@ -5,6 +5,7 @@ namespace Tanto\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -21,15 +22,21 @@ class RunCommand extends Command {
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int {
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $consoleOutput = new ConsoleOutput();
+
+        // Add custom styles
+        $this->addStyles($consoleOutput);
+
         if (!file_exists('tanto.yml')) {
-            $output->writeln("<error>tanto.yml not found. Run 'tanto:init' first.</error>");
+            $consoleOutput->writeln("<error>tanto.yml not found. Run 'tanto:init' first.</error>");
             return Command::FAILURE;
         }
 
         $yaml = Yaml::parseFile('tanto.yml');
         if (empty($yaml['commands'])) {
-            $output->writeln("<error>No commands found in tanto.yml.</error>");
+            $consoleOutput->writeln("<error>No commands found in tanto.yml.</error>");
             return Command::FAILURE;
         }
 
@@ -40,33 +47,55 @@ class RunCommand extends Command {
         if ($commandName) {
             foreach ($commands as $command) {
                 if ($command['name'] === $commandName) {
-                    $output->writeln(sprintf("Running: %s", $command['command']));
+                    $consoleOutput->writeln("<info>Running:</info> <command>{$command['command']}</command>");
                     passthru($command['command']);
                     return Command::SUCCESS;
                 }
             }
 
-            $output->writeln(sprintf("<error>Command '%s' not found in tanto.yml.</error>", $commandName));
+            $consoleOutput->writeln("<error>Command '{$commandName}' not found in tanto.yml.</error>");
             return Command::FAILURE;
         }
 
         // No command name provided, list available commands
-        $output->writeln("Available Commands:");
+        $consoleOutput->writeln("<info>Available Commands:</info>");
         foreach ($commands as $index => $command) {
-            $output->writeln(sprintf("[%d] %s (%s)", $index, $command['name'], $command['source']));
+            $description = $command['description'] ?? 'No description provided.';
+            $consoleOutput->writeln(
+                sprintf(
+                    "<number>[%d]</number> <name>%s</name> (<source>%s</source>) - <info>%s</info>",
+                    $index,
+                    $command['name'],
+                    $command['source'],
+                    $description
+                )
+            );
         }
 
-        $output->writeln("\nSelect a command to run:");
+        $consoleOutput->writeln("\n<question>Select a command to run:</question>");
         $choice = trim(fgets(STDIN));
         if (!isset($commands[$choice])) {
-            $output->writeln("<error>Invalid choice.</error>");
+            $consoleOutput->writeln("<error>Invalid choice.</error>");
             return Command::FAILURE;
         }
 
         $selectedCommand = $commands[$choice];
-        $output->writeln(sprintf("Running: %s", $selectedCommand['command']));
+        $consoleOutput->writeln("<info>Running:</info> <command>{$selectedCommand['command']}</command>");
         passthru($selectedCommand['command']);
 
         return Command::SUCCESS;
+    }
+
+    private function addStyles(ConsoleOutput $output)
+    {
+        $formatter = $output->getFormatter();
+
+        $formatter->setStyle('info', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
+        $formatter->setStyle('error', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('red', null, ['bold']));
+        $formatter->setStyle('command', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('yellow', null, ['bold']));
+        $formatter->setStyle('question', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('cyan'));
+        $formatter->setStyle('number', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('blue', null, ['bold']));
+        $formatter->setStyle('name', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('white'));
+        $formatter->setStyle('source', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('magenta'));
     }
 }
