@@ -119,7 +119,3 @@ We welcome contributions! Please fork the repository, make your changes, and sub
 
 ## License
 This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to replace placeholders like `RoninDevelopers/tanto` with actual details based on your Composer package configuration.
