@@ -1,5 +1,5 @@
 {
-    "name": "your-username/tanto",
+    "name": "ronindevelopers/tanto",
     "description": "A CLI tool to manage scripts from composer.json and package.json.",
     "type": "project",
     "license": "MIT",
