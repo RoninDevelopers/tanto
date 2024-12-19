@@ -1,16 +1,16 @@
 {
-    "name": "ronindevelopers/tanto",
-    "description": "CLI tool to manage scripts in package.json and composer.json",
-    "type": "library",
+    "name": "your-username/tanto",
+    "description": "A CLI tool to manage scripts from composer.json and package.json.",
+    "type": "project",
+    "license": "MIT",
     "require": {
-        "php": ">=7.4",
-        "symfony/console": "^5.0",
-        "symfony/yaml": "^5.0"
+        "symfony/console": "^6.0",
+        "symfony/yaml": "^6.0"
     },
+    "bin": ["bin/tanto"],
     "autoload": {
         "psr-4": {
             "Tanto\\": "src/"
         }
-    },
-    "bin": ["bin/tanto"]
+    }
 }
