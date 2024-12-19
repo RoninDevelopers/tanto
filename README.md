@@ -20,19 +20,21 @@ _A tantō a traditionally made Japanese knife that were worn by the samurai clas
 ## Installation
 
 ### Step 1: Install the Package via Composer
+
 To install Tanto, add it to your project using Composer:
 
 ```bash
-composer require --dev RoninDevelopers/tanto
+composer require --dev ronindevelopers/tanto
 ```
 
 Alternatively, you can install it globally:
 
 ```bash
-composer global require RoninDevelopers/tanto
+composer global require ronindevelopers/tanto
 ```
 
 ### Step 2: Set Up the CLI
+
 If installed locally, you can use the `bin/tanto` script:
 
 ```bash
@@ -50,6 +52,7 @@ tanto
 ## Usage
 
 ### 1. Initialize the Configuration
+
 Run the `tanto:init` command to scan your project and create the `tanto.yml` file:
 
 ```bash
@@ -57,11 +60,13 @@ Run the `tanto:init` command to scan your project and create the `tanto.yml` fil
 ```
 
 This will:
+
 - Look for `composer.json` and `package.json` files.
 - Extract all scripts and commands.
 - Save them in a `tanto.yml` file in your project root.
 
 Example `tanto.yml`:
+
 ```yaml
 commands:
   - name: test
@@ -75,6 +80,7 @@ commands:
 ```
 
 ### 2. List and Run Commands
+
 To list all available commands and run them interactively, use the `tanto:run` command:
 
 ```bash
@@ -84,6 +90,7 @@ To list all available commands and run them interactively, use the `tanto:run` c
 This will display a numbered list of commands. Select one to execute it.
 
 Example:
+
 ```bash
 Available Commands:
 [0] test (package.json)
@@ -93,6 +100,7 @@ Select a command to run:
 ```
 
 ### 3. Run a Command Directly
+
 You can run a command directly by passing its name as an argument to `tanto:run`:
 
 ```bash
@@ -103,19 +111,12 @@ If the command name matches one in `tanto.yml`, it will execute immediately.
 
 ---
 
-## Development
-
-### Testing
-You can write and run tests for Tanto using PHPUnit. To execute the tests:
-
-```bash
-composer test
-```
-
 ### Contributing
+
 We welcome contributions! Please fork the repository, make your changes, and submit a pull request.
 
 ---
 
 ## License
+
 This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

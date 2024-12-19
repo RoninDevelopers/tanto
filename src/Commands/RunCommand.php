@@ -22,8 +22,7 @@ class RunCommand extends Command {
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $consoleOutput = new ConsoleOutput();
 
         // Add custom styles
@@ -86,8 +85,7 @@ class RunCommand extends Command {
         return Command::SUCCESS;
     }
 
-    private function addStyles(ConsoleOutput $output)
-    {
+    private function addStyles(ConsoleOutput $output) {
         $formatter = $output->getFormatter();
 
         $formatter->setStyle('info', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
