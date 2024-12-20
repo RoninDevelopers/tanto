@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class UpdateCommand extends Command {
-    protected static $defaultName = 'tanto:update';
+    protected static $defaultName = 'update';
 
     protected function configure() {
         $this
