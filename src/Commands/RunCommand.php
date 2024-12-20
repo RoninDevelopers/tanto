@@ -1,4 +1,13 @@
 <?php
+/**
+ * Tanto CLI
+ *
+ * The RunCommand executes commands defined in tanto.yml. It can also list available commands and run a selected command.
+ *
+ * @package Tanto
+ * @license MIT
+ * @since 1.0.0
+ */
 
 namespace Tanto\Commands;
 

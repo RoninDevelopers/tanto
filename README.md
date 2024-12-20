@@ -109,6 +109,19 @@ You can run a command directly by passing its name as an argument to `tanto:run`
 
 If the command name matches one in `tanto.yml`, it will execute immediately.
 
+
+### 4. Update the Configuration
+
+Run the update `tanto:update` command to refresh `tanto.yml` with the latest scripts:
+
+```bash
+./vendor/bin/tanto update
+```
+
+This will scan `package.json` and `composer.json` for new commands.
+Existing commands' descriptions will be preserved.
+New commands will have a '' description by default, which you can manually edit later in `tanto.yml`.
+
 ---
 
 ### Contributing

@@ -1,4 +1,14 @@
 <?php
+/**
+ * Tanto CLI
+ *
+ * The InitCommand scans the project for composer.json and package.json files, extracts scripts, and creates a tanto.yml configuration file.
+ *
+ * @package Tanto
+ * @license MIT
+ * @since 1.0.0
+ */
+
 
 namespace Tanto\Commands;
 

@@ -1,10 +1,18 @@
 <?php
+/**
+ * Tanto CLI
+ *
+ * @package Tanto
+ * @license MIT
+ * @since 1.0.0
+ */
 
 namespace Tanto;
 
 use Symfony\Component\Console\Application;
 use Tanto\Commands\InitCommand;
 use Tanto\Commands\RunCommand;
+use Tanto\Commands\UpdateCommand;
 
 class Tanto
 {
@@ -15,6 +23,7 @@ class Tanto
         // Register all commands
         $application->add(new InitCommand());
         $application->add(new RunCommand());
+        $application->add(new UpdateCommand());
 
         return $application;
     }
